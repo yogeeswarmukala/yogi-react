@@ -1,39 +1,37 @@
-import React from 'react'
 import Navbar from './components/Navbar'
 import Section from './components/Section'
-import '../src/components/styles.css'
+import './components/styles.css'
 import Doctorcard from './components/Doctorcard'
 import Addnewdoctor from './components/Addnewdoctor'
-// import { useState } from 'react'
-import{useState,useEffect} from 'react'
+import { useState, useEffect } from 'react'
+import { Routes, Route } from 'react-router-dom'
+import Doctordetails from './components/Doctordetails'
+import Weather from './components/Weather'
+
 function App() {
-  let[c,setc]=useState(0)
-  let[count,setcount]=useState(0)
-  useEffect(()=>{
+  let [c, setC] = useState(0)
+  let [count, setCount] = useState(0)
+
+  useEffect(() => {
     console.log('api call running')
-  },[count])
-  // let [c,setC]=useState(0)
+  }, [count])
+
   return (
     <div>
-      {count}
-      <button onClick={()=>setcount(count+1)}>increment count</button>
       {c}
-      <button onClick={()=>setc(c+1)}>increment c</button>
-      {/* {c}
-      <button onClick={()=>{
-        setC(c+1)
-        console.log(c)
-      }}>increment</button> */}
-      <Navbar/>
-      <Section/>
-      <div className='doctorcontainer'>
-        <Doctorcard name='John' gender='male' specialization='Bones specialist'/>
-        <Doctorcard name='Jessy' gender='female' specialization='Heart specialist'/>
-        <Doctorcard name='Jack' gender='male' specialization='Muscles specialist'/>
-        <Doctorcard name='Jane' gender='female' specialization='Neurology'/>
-        <Doctorcard name='Jordan' gender='male' specialization='Orthopedic'/>
-      </div>
-      <Addnewdoctor/>
+      <button onClick={() => setC(c + 1)}>inc c</button>
+
+      {count}
+      <button onClick={() => setCount(count + 1)}>inc count</button>
+
+      <Navbar />
+
+      <Routes>
+        <Route path='/' element={<Section />} />
+        <Route path='/adddoctor' element={<Addnewdoctor />} />
+        <Route path='/doctor/:id' element={<Doctordetails />} />
+        <Route path='/weather' element={<Weather />} />
+      </Routes>
     </div>
   )
 }
